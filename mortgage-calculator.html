@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mortgage Calculator | John Grossi Referrals</title>
+<meta name="description" content="Estimate your monthly mortgage payment, see the effect of extra payments, and view a full amortization schedule.">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .calc-wrap { display: grid; grid-template-columns: 1.1fr 1fr; gap: 28px; align-items: start; }
+  .calc-form label { display:block; font-weight:600; margin: 14px 0 6px; color: var(--navy); font-size: 0.92rem; }
+  .calc-form input, .calc-form select {
+    width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 4px; font-size: 0.95rem; font-family: inherit;
+  }
+  .calc-form .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .calc-form .hint { color: var(--muted); font-size: 0.8rem; margin-top: 2px; }
+  .results-card {
+    background: var(--navy); color: #fff; border-radius: 10px; padding: 26px 28px; position: sticky; top: 90px;
+  }
+  .results-card h3 { color: #fff; margin-top: 0; }
+  .results-total { font-size: 2.1rem; font-weight: 700; color: var(--gold-light); margin: 4px 0 2px; }
+  .results-total-label { color: #c7cede; font-size: 0.85rem; margin-bottom: 18px; }
+  .results-line { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.12); font-size: 0.92rem; }
+  .results-line span:first-child { color: #c7cede; }
+  .extra-box { margin-top: 18px; padding: 14px 16px; background: rgba(201,162,39,0.15); border: 1px solid rgba(201,162,39,0.4); border-radius: 6px; font-size: 0.88rem; }
+  .extra-box strong { color: var(--gold-light); }
+  details.amort { margin-top: 30px; }
+  details.amort summary { cursor: pointer; font-weight: 600; color: var(--navy); padding: 10px 0; }
+  table.amort-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 0.88rem; }
+  table.amort-table th, table.amort-table td { text-align: right; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+  table.amort-table th:first-child, table.amort-table td:first-child { text-align: left; }
+  table.amort-table th { color: var(--navy); background: #f2f2ee; }
+  @media (max-width: 800px) {
+    .calc-wrap { grid-template-columns: 1fr; }
+    .results-card { position: static; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">John Grossi <span>Real Estate Referrals</span></div>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="buyers.html">Buyers</a></li>
+        <li><a href="sellers.html">Sellers</a></li>
+        <li><a href="market.html">Market Info</a></li>
+        <li><a href="mortgage-calculator.html" class="active">Mortgage Calculator</a></li>
+        <li><a href="find-an-agent.html">Find an Agent</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Mortgage Calculator</h1>
+  <p class="lead">Estimate your monthly payment, see how extra payments shorten your loan, and view the full breakdown &mdash; updates live as you type.</p>
+</section>
+
+<main>
+
+  <section>
+    <div class="calc-wrap">
+      <div class="calc-form card">
+        <h3 style="margin-top:0;">Loan Details</h3>
+
+        <div class="row2">
+          <div>
+            <label for="homePrice">Home Price</label>
+            <input type="number" id="homePrice" value="500000" min="0" step="1000">
+          </div>
+          <div>
+            <label for="downPayment">Down Payment</label>
+            <input type="number" id="downPayment" value="100000" min="0" step="1000">
+          </div>
+        </div>
+
+        <div class="row2">
+          <div>
+            <label for="rate">Interest Rate (%)</label>
+            <input type="number" id="rate" value="6.5" min="0" step="0.01">
+          </div>
+          <div>
+            <label for="term">Loan Term</label>
+            <select id="term">
+              <option value="30">30 years</option>
+              <option value="20">20 years</option>
+              <option value="15">15 years</option>
+              <option value="10">10 years</option>
+            </select>
+          </div>
+        </div>
+
+        <h3 style="margin-bottom:0;">Optional Costs</h3>
+        <p class="hint" style="margin-top:2px;">Leave at 0 if you'd rather estimate principal &amp; interest only.</p>
+
+        <div class="row2">
+          <div>
+            <label for="propertyTax">Annual Property Tax ($)</label>
+            <input type="number" id="propertyTax" value="10000" min="0" step="100">
+          </div>
+          <div>
+            <label for="insurance">Annual Home Insurance ($)</label>
+            <input type="number" id="insurance" value="1800" min="0" step="50">
+          </div>
+        </div>
+
+        <div class="row2">
+          <div>
+            <label for="pmi">Monthly PMI ($)</label>
+            <input type="number" id="pmi" value="0" min="0" step="10">
+          </div>
+          <div>
+            <label for="hoa">Monthly HOA ($)</label>
+            <input type="number" id="hoa" value="0" min="0" step="10">
+          </div>
+        </div>
+
+        <label for="extra">Extra Monthly Payment ($)</label>
+        <input type="number" id="extra" value="0" min="0" step="25">
+        <p class="hint">Applied directly to principal every month, on top of your regular payment.</p>
+      </div>
+
+      <div class="results-card">
+        <h3>Your Estimate</h3>
+        <div class="results-total" id="totalMonthly">$0</div>
+        <div class="results-total-label">Total monthly payment</div>
+
+        <div class="results-line"><span>Principal &amp; Interest</span><span id="piLine">$0</span></div>
+        <div class="results-line"><span>Property Tax</span><span id="taxLine">$0</span></div>
+        <div class="results-line"><span>Home Insurance</span><span id="insLine">$0</span></div>
+        <div class="results-line"><span>PMI</span><span id="pmiLine">$0</span></div>
+        <div class="results-line"><span>HOA</span><span id="hoaLine">$0</span></div>
+        <div class="results-line"><span>Loan Amount</span><span id="loanLine">$0</span></div>
+        <div class="results-line"><span>Total Interest Paid</span><span id="interestLine">$0</span></div>
+        <div class="results-line"><span>Payoff Date</span><span id="payoffLine">&mdash;</span></div>
+
+        <div class="extra-box" id="extraBox" style="display:none;">
+          <strong>With your extra payments:</strong> <span id="extraSummary"></span>
+        </div>
+      </div>
+    </div>
+
+    <details class="amort">
+      <summary>Show year-by-year amortization schedule</summary>
+      <table class="amort-table">
+        <thead>
+          <tr><th>Year</th><th>Principal Paid</th><th>Interest Paid</th><th>Remaining Balance</th></tr>
+        </thead>
+        <tbody id="amortBody"></tbody>
+      </table>
+    </details>
+  </section>
+
+  <div class="callout">
+    This calculator gives a good-faith estimate for planning purposes only &mdash; actual rates, taxes, insurance, and fees vary by lender, town, and property. For a precise number, get pre-approved with a lender. Want a referral to a proven agent who can point you to a strong local lender too?
+    <a href="contact.html">Get matched &rarr;</a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <strong style="color:#fff;">John Grossi Referrals</strong>
+      <p class="footer-note">A New Jersey licensed real estate referral service. Not a brokerage. Not a substitute for legal, financial, or tax advice.</p>
+    </div>
+    <div>
+      <p>Email: <a href="mailto:John.T.Grossi@gmail.com">John.T.Grossi@gmail.com</a></p>
+      <p><a href="contact.html">Contact form &rarr;</a></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function fmtMoney(n) {
+    return '$' + Math.round(n).toLocaleString('en-US');
+  }
+
+  function simulateLoan(principal, monthlyRate, basePayment, extra, capMonths) {
+    var balance = principal;
+    var totalInterest = 0;
+    var months = 0;
+    var yearly = [];
+    var yearPrincipal = 0, yearInterest = 0;
+
+    if (basePayment + extra <= 0) {
+      return { months: 0, totalInterest: 0, yearly: [], balance: balance };
+    }
+
+    while (balance > 0.5 && months < capMonths) {
+      var interest = balance * monthlyRate;
+      var principalPay = basePayment + extra - interest;
+      if (principalPay < 0) principalPay = 0;
+      if (principalPay > balance) principalPay = balance;
+      balance -= principalPay;
+      totalInterest += interest;
+      months++;
+      yearPrincipal += principalPay;
+      yearInterest += interest;
+
+      if (months % 12 === 0 || balance <= 0.5) {
+        yearly.push({
+          year: Math.ceil(months / 12),
+          principal: yearPrincipal,
+          interest: yearInterest,
+          balance: Math.max(balance, 0)
+        });
+        yearPrincipal = 0;
+        yearInterest = 0;
+      }
+    }
+    return { months: months, totalInterest: totalInterest, yearly: yearly, balance: balance };
+  }
+
+  function calculate() {
+    var homePrice = parseFloat(document.getElementById('homePrice').value) || 0;
+    var downPayment = parseFloat(document.getElementById('downPayment').value) || 0;
+    var rate = parseFloat(document.getElementById('rate').value) || 0;
+    var termYears = parseInt(document.getElementById('term').value, 10) || 30;
+    var propertyTax = parseFloat(document.getElementById('propertyTax').value) || 0;
+    var insurance = parseFloat(document.getElementById('insurance').value) || 0;
+    var pmi = parseFloat(document.getElementById('pmi').value) || 0;
+    var hoa = parseFloat(document.getElementById('hoa').value) || 0;
+    var extra = parseFloat(document.getElementById('extra').value) || 0;
+
+    var loanAmount = Math.max(homePrice - downPayment, 0);
+    var monthlyRate = (rate / 100) / 12;
+    var n = termYears * 12;
+
+    var basePayment;
+    if (monthlyRate === 0) {
+      basePayment = loanAmount / n;
+    } else {
+      basePayment = loanAmount * monthlyRate * Math.pow(1 + monthlyRate, n) / (Math.pow(1 + monthlyRate, n) - 1);
+    }
+    if (!isFinite(basePayment) || loanAmount === 0) basePayment = 0;
+
+    var monthlyTax = propertyTax / 12;
+    var monthlyIns = insurance / 12;
+    var totalMonthly = basePayment + monthlyTax + monthlyIns + pmi + hoa;
+
+    document.getElementById('totalMonthly').textContent = fmtMoney(totalMonthly);
+    document.getElementById('piLine').textContent = fmtMoney(basePayment);
+    document.getElementById('taxLine').textContent = fmtMoney(monthlyTax);
+    document.getElementById('insLine').textContent = fmtMoney(monthlyIns);
+    document.getElementById('pmiLine').textContent = fmtMoney(pmi);
+    document.getElementById('hoaLine').textContent = fmtMoney(hoa);
+    document.getElementById('loanLine').textContent = fmtMoney(loanAmount);
+
+    var capMonths = Math.max(n * 2, 600);
+    var baseline = simulateLoan(loanAmount, monthlyRate, basePayment, 0, capMonths);
+    document.getElementById('interestLine').textContent = fmtMoney(baseline.totalInterest);
+
+    var payoff = new Date();
+    payoff.setMonth(payoff.getMonth() + baseline.months);
+    document.getElementById('payoffLine').textContent = payoff.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+    var scheduleResult = baseline;
+    var extraBox = document.getElementById('extraBox');
+    if (extra > 0 && loanAmount > 0) {
+      var withExtra = simulateLoan(loanAmount, monthlyRate, basePayment, extra, capMonths);
+      var monthsSaved = baseline.months - withExtra.months;
+      var interestSaved = baseline.totalInterest - withExtra.totalInterest;
+      var yearsSaved = Math.floor(monthsSaved / 12);
+      var remMonths = monthsSaved % 12;
+      var savedText = (yearsSaved > 0 ? yearsSaved + 'y ' : '') + remMonths + 'mo';
+      document.getElementById('extraSummary').textContent =
+        'Payoff in ' + Math.ceil(withExtra.months / 12) + ' years instead of ' + termYears +
+        ' — ' + savedText + ' faster, saving ' + fmtMoney(interestSaved) + ' in interest.';
+      extraBox.style.display = 'block';
+      scheduleResult = withExtra;
+    } else {
+      extraBox.style.display = 'none';
+    }
+
+    var amortBody = document.getElementById('amortBody');
+    amortBody.innerHTML = '';
+    scheduleResult.yearly.forEach(function (row) {
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td>' + row.year + '</td><td>' + fmtMoney(row.principal) + '</td><td>' +
+        fmtMoney(row.interest) + '</td><td>' + fmtMoney(row.balance) + '</td>';
+      amortBody.appendChild(tr);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var ids = ['homePrice', 'downPayment', 'rate', 'term', 'propertyTax', 'insurance', 'pmi', 'hoa', 'extra'];
+    ids.forEach(function (id) {
+      document.getElementById(id).addEventListener('input', calculate);
+      document.getElementById(id).addEventListener('change', calculate);
+    });
+    calculate();
+  });
+</script>
+
+</body>
+</html>
