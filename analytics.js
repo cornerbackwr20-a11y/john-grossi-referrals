@@ -13,7 +13,7 @@
    ============================================================ */
 
 var TRACKING = {
-  GA4_ID: "",                 // e.g. "G-XXXXXXXXXX"
+  GA4_ID: "G-0S6YQWLJ9L",                 // e.g. "G-XXXXXXXXXX"
   GOOGLE_ADS_ID: "",          // e.g. "AW-123456789"
   ADS_LABEL_LEAD: "",         // conversion label for form submissions
   ADS_LABEL_CALL: "",         // conversion label for phone clicks
