@@ -4,10 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact | John Grossi Referrals</title>
-<meta name="description" content="Request a New Jersey real estate agent referral.">
+<meta name="description" content="Request a New Jersey real estate agent referral. Takes under a minute — no cost, no obligation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
   .contact-form { max-width: 640px; }
+  #lead-form {
+    background: var(--white); border: 1px solid var(--border); border-radius: 14px;
+    padding: 10px 28px 26px; box-shadow: var(--shadow-md);
+  }
   .contact-form label { display:block; font-weight:600; margin: 16px 0 6px; color: var(--navy); }
   .contact-form input, .contact-form select, .contact-form textarea {
     width: 100%; padding: 11px 12px; border: 1px solid var(--border); border-radius: 4px; font-size: 0.95rem; font-family: inherit;
@@ -19,12 +26,12 @@
     padding: 6px 20px 18px; margin-top: 30px;
   }
   .contact-form legend { font-weight: 700; color: var(--navy); font-size: 1.05rem; padding: 0 8px; }
-  .fieldset-note { color: var(--muted); font-size: 0.85rem; margin: -6px 0 4px; }
-  .required-note { color: #8a5a00; font-size: 0.85rem; margin: -6px 0 12px; font-weight: 600; }
   label .req-mark { color: #c0392b; }
-  #form-status { display: none; padding: 14px 18px; border-radius: 6px; margin-top: 18px; font-size: 0.92rem; }
-  #form-status.success { display: block; background: #e6f4ea; border: 1px solid #b6dfc1; color: #1e5e34; }
-  #form-status.error { display: block; background: #fbe9e7; border: 1px solid #f3c2ba; color: #8a2e20; }
+  .form-status { display: none; padding: 14px 18px; border-radius: 6px; margin-top: 18px; font-size: 0.92rem; }
+  .form-status.success { display: block; background: #e6f4ea; border: 1px solid #b6dfc1; color: #1e5e34; }
+  .form-status.error { display: block; background: #fbe9e7; border: 1px solid #f3c2ba; color: #8a2e20; }
+  #step2-section { display: none; }
+  .skip-note { color: var(--muted); font-size: 0.88rem; }
   @media (max-width: 640px) { .contact-form .row2 { grid-template-columns: 1fr; } }
 </style>
 </head>
@@ -32,7 +39,7 @@
 
 <header class="site-header">
   <div class="header-inner">
-    <div class="brand">John Grossi <span>Real Estate Referrals</span></div>
+    <div class="brand">John Grossi <span>NJ Real Estate Referrals</span></div>
     <nav class="main-nav">
       <ul>
         <li><a href="index.html">Home</a></li>
@@ -45,67 +52,100 @@
         <li><a href="contact.html" class="active">Contact</a></li>
       </ul>
     </nav>
+    <a href="tel:+18482168484" class="phone-cta">(848) 216-8484</a>
   </div>
 </header>
 
 <section class="hero">
   <h1>Get matched with an agent</h1>
-  <p class="lead">Tell me a bit about what you need. No cost, no obligation.</p>
+  <p class="lead">Five quick fields and you're done &mdash; no cost, no obligation. Prefer to talk? Call or text <a href="tel:+18482168484" style="color: var(--gold-light); font-weight:700;">(848) 216-8484</a>.</p>
 </section>
 
 <main>
 
-  <section>
-    <div class="callout">
-      The details below are the same information used to complete the official Keller Williams Shore Properties Referral Information Form when I connect you with a receiving agent. Select whether you're buying or selling below, and the relevant section will open up. Submitting sends this straight to my inbox.
-    </div>
+  <!-- ================= STEP 1: quick lead capture ================= -->
+  <section id="step1-section">
+    <span class="step-tag">Step 1 of 2 &mdash; under a minute</span>
+    <h2>Tell me the basics</h2>
 
-    <form class="contact-form" id="referral-form">
+    <form class="contact-form" id="lead-form">
       <input type="hidden" name="access_key" value="f34c1c35-276a-43e6-b34e-b677de2bffe9">
-      <input type="hidden" name="subject" value="New Referral Request — John Grossi Referrals Website">
+      <input type="hidden" name="subject" value="New Lead — John Grossi Referrals Website (Step 1)">
       <input type="hidden" name="from_name" value="John Grossi Referrals Website">
       <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
 
-      <fieldset>
-        <legend>Your Contact Info</legend>
-        <label for="name">Full Name <span class="req-mark">*</span></label>
-        <input type="text" id="name" name="Name" required>
+      <label for="name">Full Name <span class="req-mark">*</span></label>
+      <input type="text" id="name" name="Name" autocomplete="name" required>
 
-        <div class="row2">
-          <div>
-            <label for="email">Email <span class="req-mark">*</span></label>
-            <input type="email" id="email" name="Email" required>
-          </div>
-          <div>
-            <label for="phone">Phone <span class="req-mark">*</span></label>
-            <input type="tel" id="phone" name="Phone" required>
-          </div>
+      <div class="row2">
+        <div>
+          <label for="phone">Phone <span class="req-mark">*</span></label>
+          <input type="tel" id="phone" name="Phone" autocomplete="tel" required>
         </div>
+        <div>
+          <label for="email">Email <span class="req-mark">*</span></label>
+          <input type="email" id="email" name="Email" autocomplete="email" required>
+        </div>
+      </div>
 
-        <label for="type">I am a <span class="req-mark">*</span></label>
-        <select id="type" name="Type" required>
-          <option value="" disabled selected>-- Select one --</option>
-          <option value="Buyer">Buyer</option>
-          <option value="Seller">Seller</option>
-          <option value="Both">Both</option>
-        </select>
-      </fieldset>
+      <div class="row2">
+        <div>
+          <label for="type">I am a <span class="req-mark">*</span></label>
+          <select id="type" name="Type" required>
+            <option value="" disabled selected>-- Select one --</option>
+            <option value="Buyer">Buyer</option>
+            <option value="Seller">Seller</option>
+            <option value="Both">Both</option>
+          </select>
+        </div>
+        <div>
+          <label for="town">Target town(s) <span class="req-mark">*</span></label>
+          <input type="text" id="town" name="Target Town" placeholder="e.g. Toms River, Brick" required>
+        </div>
+      </div>
+
+      <div class="consent-row">
+        <input type="checkbox" id="consent" name="Consent" value="Agreed to calls/texts/emails" required>
+        <label for="consent" style="font-weight:400; margin:0;">
+          I agree to receive calls, texts, and emails from John Grossi Referrals about my request.
+          Message and data rates may apply. Message frequency varies. Reply STOP to opt out of texts.
+          See our <a href="privacy.html">Privacy Policy</a>. <span class="req-mark">*</span>
+        </label>
+      </div>
+
+      <p style="margin-top:22px;"><button type="submit" id="lead-submit" class="btn btn-primary" style="border:none; cursor:pointer;">Get My Agent Match</button></p>
+      <div id="lead-status" class="form-status"></div>
+    </form>
+  </section>
+
+  <!-- ================= STEP 2: optional details (shown after step 1 succeeds) ================= -->
+  <section id="step2-section">
+    <span class="step-tag">Step 2 &mdash; optional</span>
+    <h2>Thanks &mdash; you're in. Want a better first call?</h2>
+    <p class="skip-note">Your request is already on its way to me, and I'll follow up shortly either way. If you have two more minutes, the details below are exactly what I hand to the receiving agent so they're prepared from the first conversation. <strong>Feel free to skip this</strong> &mdash; we can cover it by phone instead.</p>
+
+    <form class="contact-form" id="details-form">
+      <input type="hidden" name="access_key" value="f34c1c35-276a-43e6-b34e-b677de2bffe9">
+      <input type="hidden" name="subject" value="Lead Details — John Grossi Referrals Website (Step 2)">
+      <input type="hidden" name="from_name" value="John Grossi Referrals Website">
+      <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+      <input type="hidden" id="d_name" name="Name">
+      <input type="hidden" id="d_email" name="Email">
+      <input type="hidden" id="d_phone" name="Phone">
 
       <fieldset id="seller-fieldset">
         <legend>Seller Information</legend>
-        <p class="required-note">Required &mdash; this is what gets handed to the receiving agent so they can be prepared and give you the best possible experience from the first call.</p>
-
-        <label for="seller_address">Property Address to Be Listed <span class="req-mark">*</span></label>
-        <input type="text" id="seller_address" name="Property Address to be Listed" data-required-when-active>
+        <label for="seller_address">Property Address to Be Listed</label>
+        <input type="text" id="seller_address" name="Property Address to be Listed">
 
         <div class="row2">
           <div>
-            <label for="seller_city">City / State / Zip <span class="req-mark">*</span></label>
-            <input type="text" id="seller_city" name="Seller City/State/Zip" data-required-when-active>
+            <label for="seller_city">City / State / Zip</label>
+            <input type="text" id="seller_city" name="Seller City/State/Zip">
           </div>
           <div>
-            <label for="seller_initial_contact">When to Make Initial Contact <span class="req-mark">*</span></label>
-            <input type="text" id="seller_initial_contact" name="When to Make Initial Contact" placeholder="e.g. evenings, weekends, ASAP" data-required-when-active>
+            <label for="seller_initial_contact">When to Make Initial Contact</label>
+            <input type="text" id="seller_initial_contact" name="When to Make Initial Contact" placeholder="e.g. evenings, weekends, ASAP">
           </div>
         </div>
 
@@ -115,19 +155,14 @@
 
       <fieldset id="buyer-fieldset">
         <legend>Buyer Information</legend>
-        <p class="required-note">Required &mdash; this is what gets handed to the receiving agent so they can be prepared and give you the best possible experience from the first call.</p>
-
-        <label for="preferred_location">Preferred Location(s) <span class="req-mark">*</span></label>
-        <input type="text" id="preferred_location" name="Preferred Location" placeholder="Towns, counties, or region" data-required-when-active>
-
         <div class="row2">
           <div>
-            <label for="home_type">Size &amp; Type of Home Desired <span class="req-mark">*</span></label>
-            <input type="text" id="home_type" name="Size and Type of Home Desired" placeholder="e.g. 4BR single-family" data-required-when-active>
+            <label for="home_type">Size &amp; Type of Home Desired</label>
+            <input type="text" id="home_type" name="Size and Type of Home Desired" placeholder="e.g. 4BR single-family">
           </div>
           <div>
-            <label for="price_range">Price Range <span class="req-mark">*</span></label>
-            <input type="text" id="price_range" name="Price Range" placeholder="e.g. $450K - $550K" data-required-when-active>
+            <label for="price_range">Price Range</label>
+            <input type="text" id="price_range" name="Price Range" placeholder="e.g. $450K - $550K">
           </div>
         </div>
 
@@ -153,8 +188,8 @@
             </select>
           </div>
           <div>
-            <label for="timeline">Timeline to Move <span class="req-mark">*</span></label>
-            <select id="timeline" name="Timeline" data-required-when-active>
+            <label for="timeline">Timeline to Move</label>
+            <select id="timeline" name="Timeline">
               <option value="" disabled selected>-- Select one --</option>
               <option>Immediately</option>
               <option>1&ndash;3 months</option>
@@ -171,15 +206,19 @@
         <textarea id="buyer_notes" name="Comments (Buyer)" placeholder="Must-haves, expected arrival date, anything else I should know"></textarea>
       </fieldset>
 
-      <p style="margin-top:22px;"><button type="submit" id="submit-btn" class="btn btn-primary" style="border:none; cursor:pointer;">Send Request</button></p>
-      <div id="form-status"></div>
+      <p style="margin-top:22px;">
+        <button type="submit" id="details-submit" class="btn btn-primary" style="border:none; cursor:pointer;">Send Details</button>
+        <a href="index.html" class="skip-note" style="margin-left:14px;">Skip &mdash; I'll cover it by phone</a>
+      </p>
+      <div id="details-status" class="form-status"></div>
     </form>
-
-    <p style="color: var(--muted); font-size: 0.88rem; max-width: 640px;">
-      Submitting sends these details straight to my inbox &mdash; no email app needed on your end. Prefer to email directly? Reach me at
-      <a href="mailto:John.T.Grossi@gmail.com">John.T.Grossi@gmail.com</a>.
-    </p>
   </section>
+
+  <p style="color: var(--muted); font-size: 0.88rem; max-width: 640px;">
+    Prefer email? Reach me directly at
+    <a href="mailto:John.T.Grossi@gmail.com">John.T.Grossi@gmail.com</a>, or call/text
+    <a href="tel:+18482168484">(848) 216-8484</a>.
+  </p>
 
 </main>
 
@@ -190,84 +229,82 @@
       <p class="footer-note">A New Jersey licensed real estate referral service. Not a brokerage. Not a substitute for legal, financial, or tax advice.</p>
     </div>
     <div>
+      <p>Call or text: <a href="tel:+18482168484"><strong>(848) 216-8484</strong></a></p>
       <p>Email: <a href="mailto:John.T.Grossi@gmail.com">John.T.Grossi@gmail.com</a></p>
+      <p><a href="privacy.html">Privacy Policy</a></p>
     </div>
   </div>
 </footer>
 
 <script>
-  function syncReferralFields() {
-    var type = document.getElementById('type').value;
-    var sellerFS = document.getElementById('seller-fieldset');
-    var buyerFS = document.getElementById('buyer-fieldset');
-    var showSeller = (type === 'Seller' || type === 'Both');
-    var showBuyer = (type === 'Buyer' || type === 'Both');
-
-    sellerFS.style.display = showSeller ? '' : 'none';
-    buyerFS.style.display = showBuyer ? '' : 'none';
-
-    toggleRequired(sellerFS, showSeller);
-    toggleRequired(buyerFS, showBuyer);
-  }
-
-  function toggleRequired(fieldset, active) {
-    var fields = fieldset.querySelectorAll('[data-required-when-active]');
-    for (var i = 0; i < fields.length; i++) {
-      if (active) {
-        fields[i].setAttribute('required', 'required');
-      } else {
-        fields[i].removeAttribute('required');
-      }
-    }
-  }
-
   document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('type').addEventListener('change', syncReferralFields);
-    syncReferralFields();
 
-    var form = document.getElementById('referral-form');
-    var statusBox = document.getElementById('form-status');
-    var submitBtn = document.getElementById('submit-btn');
+    // Prefill target town from URL (?town=Toms%20River) — used by town landing pages
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('town')) document.getElementById('town').value = params.get('town');
+    if (params.get('type')) document.getElementById('type').value = params.get('type');
 
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
+    function submitTo(form, onSuccess, statusBox, submitBtn, btnLabel) {
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var payload = Object.fromEntries(new FormData(form));
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+        statusBox.className = 'form-status';
 
-      var formData = new FormData(form);
-      var payload = Object.fromEntries(formData);
-
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending...';
-      statusBox.className = '';
-      statusBox.style.display = 'none';
-
-      fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(payload)
-      })
-        .then(function (response) { return response.json(); })
-        .then(function (result) {
-          if (result.success) {
-            statusBox.textContent = "Thanks — that's on its way to me. I'll be in touch shortly.";
-            statusBox.className = 'success';
-            form.reset();
-            syncReferralFields();
-          } else {
-            statusBox.textContent = 'Something went wrong sending your request. Please try again or email John.T.Grossi@gmail.com directly.';
-            statusBox.className = 'error';
-          }
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(payload)
         })
-        .catch(function () {
-          statusBox.textContent = 'Something went wrong sending your request. Please try again or email John.T.Grossi@gmail.com directly.';
-          statusBox.className = 'error';
-        })
-        .finally(function () {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Send Request';
-        });
-    });
+          .then(function (r) { return r.json(); })
+          .then(function (result) {
+            if (result.success) { onSuccess(); }
+            else { showError(); }
+          })
+          .catch(showError)
+          .finally(function () {
+            submitBtn.disabled = false;
+            submitBtn.textContent = btnLabel;
+          });
+
+        function showError() {
+          statusBox.textContent = 'Something went wrong sending your request. Please try again, or call/text (848) 216-8484 or email John.T.Grossi@gmail.com.';
+          statusBox.className = 'form-status error';
+        }
+      });
+    }
+
+    // ---- Step 1 ----
+    var leadForm = document.getElementById('lead-form');
+    submitTo(leadForm, function () {
+      if (window.trackLead) window.trackLead('contact_step1');
+
+      // Carry contact info into step 2 and tailor which fieldsets show
+      document.getElementById('d_name').value = document.getElementById('name').value;
+      document.getElementById('d_email').value = document.getElementById('email').value;
+      document.getElementById('d_phone').value = document.getElementById('phone').value;
+      var type = document.getElementById('type').value;
+      document.getElementById('seller-fieldset').style.display = (type === 'Seller' || type === 'Both') ? '' : 'none';
+      document.getElementById('buyer-fieldset').style.display = (type === 'Buyer' || type === 'Both') ? '' : 'none';
+
+      document.getElementById('step1-section').style.display = 'none';
+      document.getElementById('step2-section').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, document.getElementById('lead-status'), document.getElementById('lead-submit'), 'Get My Agent Match');
+
+    // ---- Step 2 ----
+    var detailsForm = document.getElementById('details-form');
+    submitTo(detailsForm, function () {
+      var statusBox = document.getElementById('details-status');
+      statusBox.textContent = "Perfect — that's everything I need. I'll be in touch shortly.";
+      statusBox.className = 'form-status success';
+      document.getElementById('details-submit').style.display = 'none';
+    }, document.getElementById('details-status'), document.getElementById('details-submit'), 'Send Details');
+
   });
 </script>
 
+<script src="analytics.js"></script>
 </body>
 </html>

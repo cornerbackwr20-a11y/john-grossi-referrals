@@ -5,13 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>John Grossi Referrals | NJ Real Estate Referral Services</title>
 <meta name="description" content="Connect with a vetted, top-performing New Jersey real estate agent through a licensed referral partner. Free buyer and seller resources for NJ home shoppers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <header class="site-header">
   <div class="header-inner">
-    <div class="brand">John Grossi <span>Real Estate Referrals</span></div>
+    <div class="brand">John Grossi <span>NJ Real Estate Referrals</span></div>
     <nav class="main-nav">
       <ul>
         <li><a href="index.html" class="active">Home</a></li>
@@ -24,6 +27,7 @@
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
+    <a href="tel:+18482168484" class="phone-cta">(848) 216-8484</a>
   </div>
 </header>
 
@@ -34,6 +38,33 @@
   <a href="market.html" class="btn btn-outline">See NJ Market Data</a>
 </section>
 
+<!-- Trust bar: photo + license + proof points, directly beneath the hero -->
+<section class="trust-bar">
+  <div class="trust-inner">
+    <!-- To show your photo: save a square headshot as john-grossi.jpg in this folder.
+         Until then, the "JG" initials badge displays automatically. -->
+    <img src="john-grossi.jpg" alt="John Grossi, NJ licensed referral agent" class="trust-photo"
+         onerror="this.style.display='none';document.getElementById('trust-initials').style.display='flex';">
+    <div class="trust-initials" id="trust-initials" style="display:none;">JG</div>
+    <div>
+      <div class="trust-name">John Grossi</div>
+      <p class="trust-bio">NJ licensed referral agent &mdash; I match you with a proven local agent, at no cost to you.</p>
+    </div>
+    <div class="trust-points">
+      <span class="trust-badge license">NJ License #2185031</span>
+      <span class="trust-badge">Agents screened on verified sales data</span>
+      <span class="trust-badge">No cost to buyers or sellers</span>
+    </div>
+  </div>
+</section>
+<!-- TESTIMONIAL PLACEHOLDER: once your first referral closes, add a short quote here, e.g.
+<section class="trust-bar">
+  <div class="trust-inner">
+    <p style="margin:0; font-style:italic; color:var(--muted);">"John matched us with an agent who knew our town cold — we closed in 45 days." &mdash; First name, Town, NJ</p>
+  </div>
+</section>
+-->
+
 <main>
 
   <section>
@@ -42,7 +73,7 @@
     <div class="grid-3">
       <div class="card">
         <h3>1. Tell me what you need</h3>
-        <p>Buying, selling, town, timeline, budget, must-haves &mdash; just fill out the quick form or send me an email. No call required.</p>
+        <p>Buying, selling, town, timeline, budget, must-haves. A five-minute conversation or a quick form.</p>
       </div>
       <div class="card">
         <h3>2. I match you with a vetted agent</h3>
@@ -103,11 +134,14 @@
       <p class="footer-note">A New Jersey licensed real estate referral service. Not a brokerage. Not a substitute for legal, financial, or tax advice.</p>
     </div>
     <div>
+      <p>Call or text: <a href="tel:+18482168484"><strong>(848) 216-8484</strong></a></p>
       <p>Email: <a href="mailto:John.T.Grossi@gmail.com">John.T.Grossi@gmail.com</a></p>
+      <p><a href="privacy.html">Privacy Policy</a></p>
       <p><a href="contact.html">Contact form &rarr;</a></p>
     </div>
   </div>
 </footer>
 
+<script src="analytics.js"></script>
 </body>
 </html>

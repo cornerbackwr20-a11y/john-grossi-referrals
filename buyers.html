@@ -5,13 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NJ Home Buyer's Guide | John Grossi Referrals</title>
 <meta name="description" content="A practical, no-nonsense guide to buying a home in New Jersey in 2026: financing, house hunting, offers, and closing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <header class="site-header">
   <div class="header-inner">
-    <div class="brand">John Grossi <span>Real Estate Referrals</span></div>
+    <div class="brand">John Grossi <span>NJ Real Estate Referrals</span></div>
     <nav class="main-nav">
       <ul>
         <li><a href="index.html">Home</a></li>
@@ -24,6 +27,7 @@
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
+    <a href="tel:+18482168484" class="phone-cta">(848) 216-8484</a>
   </div>
 </header>
 
@@ -66,6 +70,21 @@
     </div>
   </section>
 
+  <div class="optin-box">
+      <h3>Take this guide with you</h3>
+      <p>Get the full NJ Buyer's Guide as a free PDF &mdash; and a heads-up when the market numbers on this site are updated.</p>
+      <form class="optin-form" data-guide="buyers-guide.pdf" data-label="buyer_guide">
+        <input type="hidden" name="access_key" value="f34c1c35-276a-43e6-b34e-b677de2bffe9">
+        <input type="hidden" name="subject" value="Buyer's Guide Download — Website">
+        <input type="hidden" name="from_name" value="John Grossi Referrals Website">
+        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+        <input type="email" name="Email" placeholder="you@email.com" aria-label="Email address" required>
+        <button type="submit" class="btn btn-primary">Get the Free PDF</button>
+      </form>
+      <p class="optin-fineprint">By submitting, you agree to receive the guide and occasional market updates by email. Unsubscribe anytime. <a href="privacy.html" style="color:#c7cede;">Privacy Policy</a>.</p>
+      <div class="optin-status"></div>
+  </div>
+
   <section>
     <h2>3. The house-hunting to closing timeline</h2>
     <ol class="steps">
@@ -84,6 +103,22 @@
     <strong>Why the agent match matters:</strong> A buyer's agent who closes deals regularly in your target towns will know which houses are overpriced, which sellers are motivated, and how to structure an offer that wins without overpaying. That's the entire reason to get matched with a proven agent instead of picking a random name off a listing sign.
   </div>
 
+
+    <div class="optin-box">
+      <h3>Take this guide with you</h3>
+      <p>Get the full NJ Buyer's Guide as a free PDF &mdash; and a heads-up when the market numbers on this site are updated.</p>
+      <form class="optin-form" data-guide="buyers-guide.pdf" data-label="buyer_guide">
+        <input type="hidden" name="access_key" value="f34c1c35-276a-43e6-b34e-b677de2bffe9">
+        <input type="hidden" name="subject" value="Buyer's Guide Download — Website">
+        <input type="hidden" name="from_name" value="John Grossi Referrals Website">
+        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+        <input type="email" name="Email" placeholder="you@email.com" aria-label="Email address" required>
+        <button type="submit" class="btn btn-primary">Get the Free PDF</button>
+      </form>
+      <p class="optin-fineprint">By submitting, you agree to receive the guide and occasional market updates by email. Unsubscribe anytime. <a href="privacy.html" style="color:#c7cede;">Privacy Policy</a>.</p>
+      <div class="optin-status"></div>
+    </div>
+
   <section>
     <p><a href="contact.html" class="btn btn-primary">Get matched with a buyer's agent</a></p>
   </section>
@@ -97,11 +132,51 @@
       <p class="footer-note">A New Jersey licensed real estate referral service. Not a brokerage. Not a substitute for legal, financial, or tax advice.</p>
     </div>
     <div>
+      <p>Call or text: <a href="tel:+18482168484"><strong>(848) 216-8484</strong></a></p>
       <p>Email: <a href="mailto:John.T.Grossi@gmail.com">John.T.Grossi@gmail.com</a></p>
+      <p><a href="privacy.html">Privacy Policy</a></p>
       <p><a href="contact.html">Contact form &rarr;</a></p>
     </div>
   </div>
 </footer>
 
+<script>
+  // Guide opt-in: capture email, then unlock the PDF immediately on-page
+  document.querySelectorAll('.optin-form').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var box = form.closest('.optin-box');
+      var status = box.querySelector('.optin-status');
+      var btn = form.querySelector('button');
+      btn.disabled = true; btn.textContent = 'One sec...';
+      status.className = 'optin-status';
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(Object.fromEntries(new FormData(form)))
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (result) {
+          if (result.success) {
+            var pdf = form.dataset.guide;
+            status.innerHTML = 'Here it is &mdash; <a href="' + pdf + '" download>download your PDF guide</a>. It just opened in a new tab as well.';
+            status.className = 'optin-status success';
+            if (window.trackLead) window.trackLead(form.dataset.label);
+            window.open(pdf, '_blank');
+          } else {
+            status.textContent = 'Something went wrong. Please try again or email John.T.Grossi@gmail.com.';
+            status.className = 'optin-status error';
+          }
+        })
+        .catch(function () {
+          status.textContent = 'Something went wrong. Please try again or email John.T.Grossi@gmail.com.';
+          status.className = 'optin-status error';
+        })
+        .finally(function () { btn.disabled = false; btn.textContent = 'Get the Free PDF'; });
+    });
+  });
+</script>
+<script src="analytics.js"></script>
 </body>
 </html>
