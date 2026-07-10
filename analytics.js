@@ -14,10 +14,10 @@
 
 var TRACKING = {
   GA4_ID: "G-0S6YQWLJ9L",                 // e.g. "G-XXXXXXXXXX"
-  GOOGLE_ADS_ID: "",          // e.g. "AW-123456789"
-  ADS_LABEL_LEAD: "",         // conversion label for form submissions
-  ADS_LABEL_CALL: "",         // conversion label for phone clicks
-  META_PIXEL_ID: ""           // e.g. "1234567890123456"
+  GOOGLE_ADS_ID: "AW-812908468",          // e.g. "AW-123456789"
+  ADS_LABEL_LEAD: "TeROCOG4-c0cELT_z4MD",         // conversion label for form submissions
+  ADS_LABEL_CALL: "obVoCLS--c0cELT_z4MD",         // conversion label for phone clicks
+  META_PIXEL_ID: "1022289850665568"           // e.g. "1234567890123456"
 };
 
 (function () {
