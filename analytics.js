@@ -15,7 +15,7 @@
 var TRACKING = {
   GA4_ID: "G-0S6YQWLJ9L",
   GOOGLE_ADS_ID: "AW-18313604510",
-  ADS_LABEL_LEAD: "",         // conversion label for form submissions — still needed
+  ADS_LABEL_LEAD: "0wbCKPJ-dAcEJ7bzZxE",     // conversion label for form submissions
   ADS_LABEL_CALL: "",         // conversion label for phone clicks — still needed
   META_PIXEL_ID: "1022289850665568"
 };
