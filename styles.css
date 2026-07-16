@@ -117,7 +117,7 @@ nav.main-nav a.active { color: var(--gold-light); }
 nav.main-nav a.active::after { right: 0; }
 
 /* Tap-to-call button (header) */
-.phone-cta {
+.phone-cta, .email-cta {
   display: inline-block;
   background: var(--gold);
   color: var(--navy);
@@ -130,13 +130,14 @@ nav.main-nav a.active::after { right: 0; }
   box-shadow: 0 2px 10px rgba(201, 162, 39, 0.35);
   transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
 }
-.phone-cta:hover {
+.phone-cta:hover, .email-cta:hover {
   background: var(--gold-light);
   text-decoration: none;
   transform: translateY(-1px);
   box-shadow: 0 4px 14px rgba(201, 162, 39, 0.45);
 }
 .phone-cta::before { content: "\260E\FE0E\2002"; }
+.email-cta::before { content: "\2709\FE0E\2002"; }
 
 /* ------------------------------------------------------------
    Hero — layered navy with gold glow and shoreline wave
