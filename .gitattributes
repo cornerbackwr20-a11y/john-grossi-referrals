@@ -1,0 +1,19 @@
+# Prevent CRLF/LF churn (Windows editors flip line endings otherwise).
+# Text files are stored and checked out with LF.
+* text=auto eol=lf
+
+# Binary assets: never apply line-ending conversion (protects PDF xref offsets).
+*.pdf   binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.ico   binary
+*.svg   text eol=lf
+*.webp  binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.otf   binary
+*.eot   binary
+*.zip   binary
